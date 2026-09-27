@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camila TV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="nav-left">
+            <h1 class="logo">Camila TV</h1>
+            <nav class="categories">
+                <button class="cat-btn active" onclick="filtrarCategoria('todos', this)">Início</button>
+                <button class="cat-btn" onclick="filtrarCategoria('Shows', this)">Shows</button>
+                <button class="cat-btn" onclick="filtrarCategoria('Performances', this)">Performances</button>
+                <button class="cat-btn" onclick="filtrarCategoria('Entrevistas', this)">Entrevistas</button>
+                <button class="cat-btn" onclick="filtrarCategoria('Vlogs', this)">Vlogs</button>
+                <button class="cat-btn" onclick="filtrarCategoria('Movie & Series', this)">Movie & Series</button>
+            </nav>
+        </div>
+        <div class="nav-right">
+            <input type="text" id="searchInput" placeholder="Pesquisar título..." oninput="filtrarPorBusca()">
+        </div>
+    </header>
+
+    <section class="hero" id="heroBanner">
+        <div class="hero-content">
+            <span class="badge" id="heroBadge">Destaque</span>
+            <h2 id="heroTitle">Título do Destaque</h2>
+            <p id="heroDesc">Descrição breve do conteúdo que está em destaque.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="playHeroVideo()">▶ Assistir</button>
+            </div>
+        </div>
+    </section>
+
+    <main class="container">
+        <h2 class="section-title" id="sectionTitle">Todos os Conteúdos</h2>
+        <div class="video-grid" id="videoGrid"></div>
+    </main>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="fecharVideo()">&times;</span>
+            <div class="modal-header-info">
+                <span id="modalVideoTitle" class="modal-video-title"></span>
+            </div>
+            <div class="iframe-container">
+                <iframe id="videoPlayer" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
