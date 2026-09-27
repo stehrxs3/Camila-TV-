@@ -8,6 +8,30 @@ const listaDeVideos = [
         descricao: "Assista ao show completo com as melhores faixas apresentadas ao vivo.",
         driveUrl: "https://drive.google.com/file/d/1JWNVyIacFmMOfSZ_cUZQIndM4QgSLbxl/preview",
         destaque: true
+    },
+
+    {
+        id: 2,
+        titulo: "Summer Sonic 2025",
+        categoria: "Shows",
+        capa:"https://via.placeholder.com/300x450/1d267/ffffff?text=Summer+Sonic",
+        banner: "https://via.placeholder.com/1200x600/1d267/ffffff?text=Summer+Sonic+2025",
+        driveUrl: "https://drive.google.com/file/d/1LjeO47v5gq0vu2gltbk_G0HQBuOAalCl/view?usp=drive_link",
+        destaque: true
+    },
+
+    {
+        id: 3,
+        titulo: "The Town 2025",
+        categoria: "shows",
+        capa: "https:via.placeholder.com/300x450/1d267/ffffff?text=The+Town",
+        banner: "https://via.placeholder.com/1200x600/1d267/ffffff?text=The+Town+2025",
+        driveUrl: "https://drive.google.com/file/d/1Vg6XHtr-xStwtK6o0pdg7YmDF_EtEr2x/view?usp=sharing",
+        destaque: true
+    },
+
+    {
+        
     }
 ];
 
