@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -7,6 +8,7 @@
     <title>Camila TV</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 
 <body>
     <header class="navbar">
@@ -22,6 +24,9 @@
             </nav>
         </div>
         <div class="nav-right">
+            <button class="live-btn" onclick="abrirTransmissaoAoVivo()">
+              <span class="live-dot"></span> AO VIVO
+            </button>
             <input type="text" id="searchInput" placeholder="Pesquisar título..." oninput="filtrarPorBusca()">
         </div>
     </header>
@@ -50,6 +55,18 @@
             </div>
             <div class="iframe-container">
                 <iframe id="videoPlayer" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div id="liveModal" class="modal">]
+        <div class="modal-content">
+            <span class="close-btn" onclick="fecharLive()">&times;</span>
+            <div class="modal-header-info">
+                <span class="modal-video-title">🔴 Transmissão Ao Vivo - Camila TV</span>
+            </div>
+            <div class="iframe-container">
+                <iframe id="livePlayer" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
             </div>
         </div>
     </div>

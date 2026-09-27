@@ -1,3 +1,5 @@
+
+const urlTransmissaoAoVivo = "https://www.youtube.com/live/-OfA04BD4GA?si=Cwo2-s_RF3Z71Znr"
 const listaDeVideos = [
     {
         id: 1,
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function converterParaEmbedDrive(url) {
     if (!url) return "";
-    return url.replace(/\/view(\?.*)?$/, "/preview");
+    return url.replace(/\/view(\?.*)?$/, "/preview").replace(/\/edit(\?.*)?$/, "/preview");
 }
 
 function configurarDestaque() {
@@ -108,10 +110,8 @@ function filtrarCategoria(cat, btn) {
 
 function filtrarPorBusca() {
     const termo = document.getElementById("searchInput").value.toLowerCase();
-    const filtrados = listaDeVideos.filter(v =>
-        v.titulo.toLowerCase().includes(termo) ||
-        v.categoria.toLowerCase().includes(termo)
-    );
+    const filtrados = listaDeVideos.filter(v => v && v,titulo && (v.titulo.toLowerCase().includes(termo) || (v.categoria && v.categoria.toLowerCase().includes(termo)))
+  );
     carregarVideos(filtrados);
 }
 
@@ -131,14 +131,6 @@ function playHeroVideo() {
     }
 }
 
-function formatarUrlDrive(url) {
-    if (!url) return "";
-    if (url.includes("drive.google.com")) {
-        return url.replace(/\/view(\?.*)?$/, "/preview").replace(/\/edit(\?.*)?$/, "/preview");
-    }
-    return url;
-}
-
 function fecharVideo() {
     const modal = document.getElementById("videoModal");
     const player = document.getElementById("videoPlayer");
@@ -146,6 +138,21 @@ function fecharVideo() {
     modal.style.display = "none";
 }
 
+function abrirTransmissaoAoVivo() {
+    const liveModal = document.getElementById("liveModal");
+    const livePlayer = document.getElementById("livePlayer");
+    livePlayer.src = "";
+    liveModal.style.display = "none";
+}
+
+function fecharLive () {
+    const liveModal = document.getElementById ("liveModal");
+    const livePlayer = document.getElementById ("livePlayer");
+    livePlayer.src = "";
+    liveModal.style.display = "none";
+}
 document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") fecharVideo();
+    if (e.key === "Escape") 
+        fecharVideo();
+        fecharLive();
 });
