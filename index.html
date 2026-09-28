@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
     <header class="navbar">
         <div class="nav-left">
@@ -24,8 +23,9 @@
             </nav>
         </div>
         <div class="nav-right">
+            <!-- Botão de Transmissão Ao Vivo -->
             <button class="live-btn" onclick="abrirTransmissaoAoVivo()">
-              <span class="live-dot"></span> AO VIVO
+                <span class="live-dot"></span> AO VIVO
             </button>
             <input type="text" id="searchInput" placeholder="Pesquisar título..." oninput="filtrarPorBusca()">
         </div>
@@ -47,6 +47,8 @@
         <div class="video-grid" id="videoGrid"></div>
     </main>
 
+
+    <!-- Modal do Player de Vídeo Regular -->
     <div id="videoModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="fecharVideo()">&times;</span>
@@ -59,7 +61,8 @@
         </div>
     </div>
 
-    <div id="liveModal" class="modal">]
+    <!-- Modal para Transmissão Ao Vivo -->
+    <div id="liveModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="fecharLive()">&times;</span>
             <div class="modal-header-info">

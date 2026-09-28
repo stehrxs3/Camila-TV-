@@ -1,40 +1,60 @@
 
-const urlTransmissaoAoVivo = "https://www.youtube.com/live/-OfA04BD4GA?si=Cwo2-s_RF3Z71Znr"
+
+
+// Configuração da URL da sua transmissão ao vivo (Ex: YouTube Live, Twitch ou HLS)
+const urlTransmissaoAoVivo = "https://www.youtube.com/embed/jkfpyJRk?autoplay=1";
+
 const listaDeVideos = [
     {
         id: 1,
         titulo: "Rock in Rio 2022",
         categoria: "Shows",
-        capa: "https://via.placeholder.com/300x450/1d2671/ffffff?text=Rock+in+Rio",
-        banner: "https://via.placeholder.com/1200x600/1d2671/ffffff?text=Rock+in+Rio+2022",
-        descricao: "Assista ao show completo com as melhores faixas apresentadas ao vivo.",
-        driveUrl: "https://drive.google.com/file/d/1JWNVyIacFmMOfSZ_cUZQIndM4QgSLbxl/preview",
-        destaque: true
-    },
-
+        capa: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&q=80",
+        banner: "https://media.gettyimages.com/id/1422667658/pt/foto/rio-de-janeiro-brazil-camila-cabello-performs-at-the-mundo-stage-during-the-rock-in-rio.jpg?s=612x612&w=0&k=20&c=Q5pZ2vHYsdYBIDJMg43v2xm-dKbMFuhsnsR1zfIQKTE=",
+        descricao: "Assista aos melhores momentos das performances no festival Rock in Rio.",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+        destaque: false
+     },
     {
         id: 2,
         titulo: "Summer Sonic 2025",
         categoria: "Shows",
-        capa:"https://via.placeholder.com/300x450/1d267/ffffff?text=Summer+Sonic",
-        banner: "https://via.placeholder.com/1200x600/1d267/ffffff?text=Summer+Sonic+2025",
-        driveUrl: "https://drive.google.com/file/d/1LjeO47v5gq0vu2gltbk_G0HQBuOAalCl/view?usp=drive_link",
-        destaque: true
+        capa: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500&q=80",
+        banner: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=1200&q=80",
+        descricao: "Assista aos melhores momentos das performances no festival Rock in Rio.",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+        destaque: false
     },
-
     {
         id: 3,
         titulo: "The Town 2025",
-        categoria: "shows",
-        capa: "https:via.placeholder.com/300x450/1d267/ffffff?text=The+Town",
-        banner: "https://via.placeholder.com/1200x600/1d267/ffffff?text=The+Town+2025",
-        driveUrl: "https://drive.google.com/file/d/1Vg6XHtr-xStwtK6o0pdg7YmDF_EtEr2x/view?usp=sharing",
+        categoria: "Shows",
+        capa:"https://media.gettyimages.com/id/2296266737/pt/foto/los-angeles-california-camila-cabello-attends-the-lucas-museum-of-narrative-art-opening-night.jpg?s=612x612&w=0&k=20&c=TaZPAs8xMY2W23eaBfMIZoY5YR3409bFquBzw3u_42A=",
+        banner: "https://rollingstone.com.br/wp-content/uploads/2025/09/Camila-Cabello-The-Town-2025-foto-Ellen-Artie-02-1536x1024.jpg",
+        descricao: "Assista ao show completo do festival The Town 2025.",
+        videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
         destaque: true
-    },
-
-    {
-        
-    }
+     },
+     {
+        id: 4,
+        titulo: "Bastidores & Entrevista Exclusiva",
+        categoria: "Entrevistas",
+        capa: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=500&q=80",
+        banner: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=1200&q=80",
+        descricao: "Conversa aberta sobre carreira, projetos futuros e criação artística.",
+        videoUrl: "https://www.youtube.com/embed/L_LUpnjgPso?autoplay=1",
+        destaque: false
+     },
+     {
+        id: 5,
+        titulo: "Vlog de Turnê pela Europa",
+        categoria: "Vlogs",
+        capa: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=500&q=80",
+        banner: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=1200&q=80",
+        descricao: "Acompanhe o dia a dia na estrada durante a turnê internacional.",
+        videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1",
+        destaque: false
+     },
 ];
 
 let videoDestaqueAtual = null;
@@ -69,12 +89,15 @@ function carregarVideos(videos) {
     const videoGrid = document.getElementById("videoGrid");
     videoGrid.innerHTML = "";
 
-    if (videos.length === 0) {
+    // Filtra itens inválidos antes de desenhar na tela
+    const videosValidos = videos.filter(v => v && v.titulo);
+
+    if (videosValidos.length === 0) {
         videoGrid.innerHTML = "<p style='color: #888;'>Nenhum vídeo encontrado.</p>";
         return;
     }
 
-    videos.forEach((video) => {
+    videosValidos.forEach((video) => {
         const card = document.createElement("div");
         card.classList.add("card");
         card.onclick = () => abrirVideo(video);
@@ -103,15 +126,21 @@ function filtrarCategoria(cat, btn) {
     if (cat === "todos") {
         carregarVideos(listaDeVideos);
     } else {
-        const filtrados = listaDeVideos.filter(v => v.categoria.toLowerCase() === cat.toLowerCase());
+        const filtrados = listaDeVideos.filter(v => 
+            v && v.categoria && v.categoria.trim().toLowerCase() === cat.trim().toLowerCase()
+        );
         carregarVideos(filtrados);
     }
 }
 
 function filtrarPorBusca() {
-    const termo = document.getElementById("searchInput").value.toLowerCase();
-    const filtrados = listaDeVideos.filter(v => v && v,titulo && (v.titulo.toLowerCase().includes(termo) || (v.categoria && v.categoria.toLowerCase().includes(termo)))
-  );
+    const termo = document.getElementById("searchInput").value.trim().toLowerCase();
+    const filtrados = listaDeVideos.filter(v =>
+        v && v.titulo && (
+            v.titulo.toLowerCase().includes(termo) ||
+            (v.categoria && v.categoria.toLowerCase().includes(termo))
+        )
+    );
     carregarVideos(filtrados);
 }
 
@@ -121,8 +150,21 @@ function abrirVideo(video) {
     const title = document.getElementById("modalVideoTitle");
 
     title.innerText = video.titulo;
-    player.src = converterParaEmbedDrive(video.driveUrl);
-    modal.style.display = "flex";
+    container.innerHTML = "";
+
+  let url = video.videoUrl || "";
+
+  if (url.includes("drive.google.com")) {
+    url = converterParaEmbedDrive(url)
+  }
+
+  if (url.endsWith(".mp4") || url.endsWith(".webm")) {
+     container.innerHTML = '<video src="${url}" controls autoplay allowfullscreen></video>';
+     } else {
+        container.innerHTML = '<iframe src ="${url}" allow="autoplay; fullscreen" allowfullscreen></iframe>';
+     }
+
+     modal.style.display = "flex";
 }
 
 function playHeroVideo() {
@@ -134,25 +176,28 @@ function playHeroVideo() {
 function fecharVideo() {
     const modal = document.getElementById("videoModal");
     const player = document.getElementById("videoPlayer");
-    player.src = "";
+   container.innerHTML = "";
     modal.style.display = "none";
 }
 
+/* Funções para a Transmissão Ao Vivo */
 function abrirTransmissaoAoVivo() {
+    const liveModal = document.getElementById("liveModal");
+    const livePlayer = document.getElementById("livePlayer");
+    livePlayer.src = urlTransmissaoAoVivo;
+    liveModal.style.display = "flex";
+}
+
+function fecharLive() {
     const liveModal = document.getElementById("liveModal");
     const livePlayer = document.getElementById("livePlayer");
     livePlayer.src = "";
     liveModal.style.display = "none";
 }
 
-function fecharLive () {
-    const liveModal = document.getElementById ("liveModal");
-    const livePlayer = document.getElementById ("livePlayer");
-    livePlayer.src = "";
-    liveModal.style.display = "none";
-}
 document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") 
+    if (e.key === "Escape") {
         fecharVideo();
         fecharLive();
+    }
 });
